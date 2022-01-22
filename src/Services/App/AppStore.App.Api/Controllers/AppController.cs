@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppStore.App.Core.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace AppStore.App.Api.Controllers
 {
@@ -7,11 +12,23 @@ namespace AppStore.App.Api.Controllers
     [Route("[controller]")]
     public sealed class AppController : ControllerBase
     {
+        private readonly IMediator mediator;
         private readonly ILogger<AppController> logger;
 
-        public AppController(ILogger<AppController> logger)
+        public AppController(IMediator mediator, ILogger<AppController> logger)
         {
-            this.logger = logger;
+            this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        [HttpGet]
+        [Route("apps")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAppAsync()
+        {
+            var response = await mediator.Send(new GetAppsQuery());
+
+            return Ok(response);
         }
     }
 }
