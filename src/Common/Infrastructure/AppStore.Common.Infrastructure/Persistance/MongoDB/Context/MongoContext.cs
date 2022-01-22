@@ -15,8 +15,8 @@ namespace AppStore.Common.Infrastructure.Persistance.MongoDB.Context
         private MongoClient mongoClient { get; set; }
         private IClientSessionHandle session { get; set; }
         private IMongoDatabase database { get; set; }
-        private List<Func<Task>> commands;
 
+        private readonly List<Func<Task>> commands;
         private readonly IMongoSettings mongoSettings;
 
         #endregion
@@ -26,6 +26,8 @@ namespace AppStore.Common.Infrastructure.Persistance.MongoDB.Context
         public MongoContext(IMongoSettings mongoSettings)
         {
             this.mongoSettings = mongoSettings ?? throw new ArgumentNullException(nameof(mongoSettings));
+
+            commands = new List<Func<Task>>();
         }
 
         #endregion
