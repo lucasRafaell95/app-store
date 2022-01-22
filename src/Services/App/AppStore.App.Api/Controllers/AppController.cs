@@ -13,7 +13,7 @@ namespace AppStore.App.Api.Controllers
     public sealed class AppController : ControllerBase
     {
         private readonly IMediator mediator;
-        private readonly ILogger<AppController> logger;
+        private readonly ILogger logger;
 
         public AppController(IMediator mediator, ILogger<AppController> logger)
         {

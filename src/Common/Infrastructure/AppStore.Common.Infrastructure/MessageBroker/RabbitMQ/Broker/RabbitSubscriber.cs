@@ -17,7 +17,7 @@ namespace AppStore.Common.Infrastructure.MessageBroker.RabbitMQ.Broker
 
         private IModel model;
         private readonly IRabbitSettings settings;
-        private readonly ILogger<RabbitSubscriber<TMessage>> logger;
+        private readonly ILogger logger;
 
         #endregion
 
