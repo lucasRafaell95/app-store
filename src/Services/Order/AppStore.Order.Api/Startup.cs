@@ -4,17 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace AppStore.Order.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -39,7 +40,7 @@ namespace AppStore.Order.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseSerilogRequestLogging();
 
             app.UseEndpoints(endpoints =>
             {
