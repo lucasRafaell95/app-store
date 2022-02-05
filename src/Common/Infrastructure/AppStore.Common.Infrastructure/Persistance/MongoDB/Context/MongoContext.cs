@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AppStore.Common.Infrastructure.Persistance.MongoDB.Context
 {
-    public sealed class MongoContext : IMongoContext
+    public sealed class MongoContext<TMongoSettings> : IMongoContext where TMongoSettings : IMongoSettings
     {
         #region Fields
 

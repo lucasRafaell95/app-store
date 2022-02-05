@@ -41,7 +41,7 @@ namespace AppStore.Common.Infrastructure.Persistance.Base
             return data.FirstOrDefault();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
             var all = await collection.FindAsync(Builders<TEntity>.Filter.Empty);
 

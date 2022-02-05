@@ -28,7 +28,7 @@ namespace AppStore.Common.Domain.Persistence.Base
         /// Returns all records of a given type
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> GetAll();
+        Task<List<TEntity>> GetAll();
 
         /// <summary>
         /// Updates the information of a record in the database
