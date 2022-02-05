@@ -1,4 +1,5 @@
 using AppStore.App.Core.Extensions;
+using AppStore.App.Persistance.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,24 +12,23 @@ namespace AppStore.App.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-
-            services.AddAppCore();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AppStore.App.Api", Version = "v1" });
             });
+
+            ConfigureAppServiceDependencies(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,5 +51,10 @@ namespace AppStore.App.Api
                 endpoints.MapControllers();
             });
         }
+
+        private IServiceCollection ConfigureAppServiceDependencies(IServiceCollection services)
+            => services
+                .AddPersistenceDependencies(configuration)
+                .AddCoreDependencies(configuration);
     }
 }
