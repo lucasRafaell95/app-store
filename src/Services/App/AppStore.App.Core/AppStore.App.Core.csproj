@@ -5,13 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.2.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Application\Appstore.Common.Application\Appstore.Common.Application.csproj" />
+    <ProjectReference Include="..\..\..\Common\Domain\AppStore.Common.Domain\AppStore.Common.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Infrastructure\AppStore.Common.Infrastructure\AppStore.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\AppStore.App.Domain\AppStore.App.Domain.csproj" />
   </ItemGroup>
 
 </Project>

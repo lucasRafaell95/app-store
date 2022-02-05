@@ -1,6 +1,9 @@
 ﻿using Appstore.Common.Application.Models.Default;
-using Appstore.Common.Application.Models.DTOs;
+using AppStore.App.Core.Caching.Contracts;
+using AppStore.App.Domain.Repositories;
+using AppStore.Common.Domain.Entities;
 using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,23 +12,43 @@ namespace AppStore.App.Core.Queries.Handlers
 {
     public sealed class AppQueryHandler : IRequestHandler<GetAppsQuery, Response>
     {
-        public Task<Response> Handle(GetAppsQuery request, CancellationToken cancellationToken)
-        {
-            var result = new Response
-            {
-                Data = new List<AppDTO>
-                {
-                    new AppDTO
-                    {
-                        Id = 10,
-                        Name = "whatsapp",
-                        Price = 10,
-                        Description = "aplicativo de mensagens"
-                    }
-                }
-            };
+        #region Fields
 
-            return Task.FromResult(result);
+        private readonly IApplicationCacheService cacheService;
+        private readonly IApplicationRepository applicationRepository;
+
+        #endregion
+
+        #region Constructor
+
+        public AppQueryHandler(IApplicationCacheService cacheService,
+                               IApplicationRepository applicationRepository)
+        {
+            this.cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
+            this.applicationRepository = applicationRepository ?? throw new ArgumentNullException(nameof(applicationRepository));
         }
+
+        #endregion
+
+        #region Public Methods
+
+        public async Task<Response> Handle(GetAppsQuery request, CancellationToken cancellationToken)
+        {
+            var result = await cacheService.GetApplicationsAsync(GetFromDatabase);
+
+            return await Task.FromResult(new Response
+            {
+                Data = result
+            });
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private Task<List<Application>> GetFromDatabase()
+            => applicationRepository.GetAll();
+
+        #endregion
     }
 }
