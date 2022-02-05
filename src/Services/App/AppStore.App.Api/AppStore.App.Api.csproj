@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppStore.App.Core\AppStore.App.Core.csproj" />
+    <ProjectReference Include="..\AppStore.App.Persistance\AppStore.App.Persistance.csproj" />
   </ItemGroup>
 
 </Project>
