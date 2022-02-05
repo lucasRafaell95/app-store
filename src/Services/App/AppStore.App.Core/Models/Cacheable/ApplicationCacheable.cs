@@ -1,8 +1,10 @@
-﻿namespace Appstore.Common.Application.Models.DTOs
+﻿using System;
+
+namespace AppStore.App.Core.Models.Cacheable
 {
-    public sealed record AppDTO
+    public sealed record ApplicationCacheable
     {
-        public int Id { get; set; }
+        public Guid Id { get; init; }
         public string Name { get; init; }
         public double Price { get; init; }
         public string Description { get; init; }

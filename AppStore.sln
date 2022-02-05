@@ -39,7 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appstore.Common.Application", "src\Common\Application\Appstore.Common.Application\Appstore.Common.Application.csproj", "{FA63BF84-58CF-4681-82F4-4BB25A60DE29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.Order.Worker", "src\Services\Order\AppStore.Order.Worker\AppStore.Order.Worker.csproj", "{6AFE490C-781F-4C59-B800-68DAA0DA0B82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppStore.Order.Worker", "src\Services\Order\AppStore.Order.Worker\AppStore.Order.Worker.csproj", "{6AFE490C-781F-4C59-B800-68DAA0DA0B82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.App.Persistance", "src\Services\App\AppStore.App.Persistance\AppStore.App.Persistance.csproj", "{05CB3109-456D-490C-941A-FE97C8618EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStore.App.Domain", "src\Services\App\AppStore.App.Domain\AppStore.App.Domain.csproj", "{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,14 @@ Global
 		{6AFE490C-781F-4C59-B800-68DAA0DA0B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AFE490C-781F-4C59-B800-68DAA0DA0B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AFE490C-781F-4C59-B800-68DAA0DA0B82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05CB3109-456D-490C-941A-FE97C8618EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05CB3109-456D-490C-941A-FE97C8618EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05CB3109-456D-490C-941A-FE97C8618EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05CB3109-456D-490C-941A-FE97C8618EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +117,8 @@ Global
 		{845B6DC9-A7B3-4A33-A579-5AEF72ABD637} = {DFD529F6-DDC9-4507-8986-CECA6013AFA8}
 		{FA63BF84-58CF-4681-82F4-4BB25A60DE29} = {845B6DC9-A7B3-4A33-A579-5AEF72ABD637}
 		{6AFE490C-781F-4C59-B800-68DAA0DA0B82} = {6042439F-E3BF-460F-983A-876320EE7F98}
+		{05CB3109-456D-490C-941A-FE97C8618EE2} = {4F06DBE0-2466-47A8-91E7-70FF2CBD54B9}
+		{6F485EB5-08EF-40FB-9C5D-D99BBF83B5D3} = {4F06DBE0-2466-47A8-91E7-70FF2CBD54B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {733082EF-DEB8-4E3D-820D-BAC26A967E49}
