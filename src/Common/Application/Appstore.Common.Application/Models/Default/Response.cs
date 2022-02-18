@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Appstore.Common.Application.Models.Default
 {
-    public sealed class Response
+    public class Response
     {
         public object Data { get; set; }
         public string Message { get; set; }
