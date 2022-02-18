@@ -1,6 +1,6 @@
 ﻿using AppStore.Common.Domain.Entities;
 using AppStore.Common.Domain.Persistence.Base;
-using AppStore.Common.Domain.Persistence.MongoDB;
+using AppStore.Common.Domain.Persistence.MongoDB.Base;
 using MongoDB.Driver;
 using ServiceStack;
 using System;
@@ -13,26 +13,30 @@ namespace AppStore.Common.Infrastructure.Persistance.Base
     {
         #region Fields
 
-        protected readonly IMongoContext context;
-        protected IMongoCollection<TEntity> collection;
+        protected readonly IMongoClient client;
+        protected readonly IMongoCollection<TEntity> collection;
 
         #endregion
 
         #region Constructor 
 
-        protected Repository(IMongoContext context)
+        protected Repository(IMongoSettings settings)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-            collection = context.GetCollection<TEntity>(typeof(TEntity).Name);
+            this.client = new MongoClient(settings.ConnectionString);
+
+            var database = this.client.GetDatabase(settings.DatabaseName);
+
+            this.collection = database.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
         #endregion
 
         #region IRepository Methods
 
-        public virtual void Create(TEntity entity)
-            => context.AddCommand(() => collection.InsertOneAsync(entity));
+        public virtual async Task Create(TEntity entity)
+            => await collection.InsertOneAsync(entity);
 
         public virtual async Task<TEntity> GetById(Guid id)
         {
@@ -48,17 +52,13 @@ namespace AppStore.Common.Infrastructure.Persistance.Base
             return all.ToList();
         }
 
-        public virtual void Update(TEntity entity)
-        {
-            context.AddCommand(() =>
-                collection.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", entity.Id), entity));
-        }
+        public virtual async Task Update(TEntity entity)
+            => await collection.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", entity.Id), entity);
 
-        public virtual void Delete(Guid id)
-            => context.AddCommand(() => collection.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
+        public virtual async Task Delete(Guid id)
+            => await collection.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id));
 
-        public void Dispose()
-            => context?.Dispose();
+        void IDisposable.Dispose() { }
 
         #endregion
     }

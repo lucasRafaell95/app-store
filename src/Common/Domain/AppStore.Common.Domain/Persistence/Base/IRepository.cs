@@ -15,7 +15,7 @@ namespace AppStore.Common.Domain.Persistence.Base
         /// Creates a new record in the database
         /// </summary>
         /// <param name="entity"></param>
-        void Create(TEntity entity);
+        Task Create(TEntity entity);
 
         /// <summary>
         /// Returns record according to the given id
@@ -34,12 +34,12 @@ namespace AppStore.Common.Domain.Persistence.Base
         /// Updates the information of a record in the database
         /// </summary>
         /// <param name="entity"></param>
-        void Update(TEntity entity);
+        Task Update(TEntity entity);
 
         /// <summary>
         /// Delete a record according to the given Id
         /// </summary>
         /// <param name="id"></param>
-        void Delete(Guid id);
+        Task Delete(Guid id);
     }
 }
