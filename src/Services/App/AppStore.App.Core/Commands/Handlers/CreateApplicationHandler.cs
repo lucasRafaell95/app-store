@@ -2,7 +2,6 @@
 using AppStore.App.Core.Models.DTO;
 using AppStore.App.Domain.Repositories;
 using AppStore.Common.Domain.Entities;
-using AppStore.Common.Domain.Persistence.Base;
 using Mapster;
 using MediatR;
 using System;
@@ -16,17 +15,15 @@ namespace AppStore.App.Core.Commands.Handlers
     {
         #region Fields
 
-        private readonly IDatabaseTransaction transaction;
         private readonly IApplicationRepository applicationRepository;
 
         #endregion
 
         #region Constructor
 
-        public CreateApplicationHandler(IApplicationRepository applicationRepository, IDatabaseTransaction transaction)
+        public CreateApplicationHandler(IApplicationRepository applicationRepository)
         {
             this.applicationRepository = applicationRepository ?? throw new ArgumentNullException(nameof(applicationRepository));
-            this.transaction = transaction ?? throw new ArgumentNullException(nameof(transaction));
         }
 
         #endregion
@@ -39,9 +36,7 @@ namespace AppStore.App.Core.Commands.Handlers
 
             if (app is null)
             {
-                applicationRepository.Create(request.Adapt<Application>());
-
-                await transaction.CommitTransaction();
+                await applicationRepository.Create(request.Adapt<Application>());
 
                 return await Task.FromResult(new Response { Data = request.Adapt<ApplicationDTO>() });
             }

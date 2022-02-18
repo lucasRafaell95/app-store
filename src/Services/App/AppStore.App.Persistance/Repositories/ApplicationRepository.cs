@@ -1,17 +1,17 @@
 ﻿using AppStore.App.Domain.Repositories;
 using AppStore.Common.Domain.Entities;
-using AppStore.Common.Domain.Persistence.MongoDB;
+using AppStore.Common.Domain.Persistence.MongoDB.Base;
 using AppStore.Common.Infrastructure.Persistance.Base;
 using MongoDB.Driver;
 using System.Threading.Tasks;
 
 namespace AppStore.App.Persistance.Repositories
 {
-    public sealed class ApplicationRepository : Repository<Application>, IApplicationRepository
+    public sealed class ApplicationRepository<TMongoSettings> : Repository<Application>, IApplicationRepository where TMongoSettings : IMongoSettings
     {
         #region Constructor
 
-        public ApplicationRepository(IMongoContext context) : base(context) { }
+        public ApplicationRepository(TMongoSettings settings) : base(settings) { }
 
         #endregion
 
